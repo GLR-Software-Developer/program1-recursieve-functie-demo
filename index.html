@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursive functions</title>
+</head>
+<body>
+    Klik hier als je meer wilt weten over <a href="https://www.w3schools.com/js/js_htmldom_eventlistener.asp">event listeners</a>, of wanneer je meer wilt weten over welke <a href="https://www.w3schools.com/tags/ref_eventattributes.asp">type events</a> er zijn.
+
+    <script src="player.js"></script>
+
+    <script>
+
+        // Initieer de speler
+        const speler1 = createPlayer()
+        
+
+        // Lijst met kleuren waar doorheen wordt gewisselt door op spatie te drukken
+        const colors = ["red", "blue", "lime"]
+        let colorIndex = 0
+
+
+        // Verander de border radius om de muis te laten bewegen
+        window.addEventListener("mousemove", (e) => {
+            const mouseX = e.clientX
+            const percentageX = mouseX / window.innerWidth
+            
+            const mouseY = e.clientY
+            const percentageY = mouseY / window.innerHeight
+
+            speler1.style.borderRadius = ( percentageX * 50 ) + "%"
+
+
+            speler1.style.width = ( 16 + percentageY * 32 ) + "px"
+            speler1.style.height = ( 16 + percentageY * 32 ) + "px"
+        })
+
+
+        window.addEventListener("keydown", (e) => {
+            // Console log de keyCode om te zien welke toets gekoppeld is aan welke keyCode
+            // console.log(e.keyCode)
+
+            // Pijltje naar links = keyCode 39
+            if (e.keyCode == 37) {
+                speler1.x -= 2
+            }
+
+            // Pijltje naar rechts = keyCode 39
+            if (e.keyCode == 39) {
+                speler1.x += 2
+            }
+
+            if (e.keyCode == 32) {
+                colorIndex++
+                // Als colorIndex hoger is dan het aantal waarden in de array, resetten we colorIndex terug naar 0
+                if (colorIndex >= colors.length) {
+                    colorIndex = 0
+                }
+
+                // Update de achtergrond kleur
+                speler1.style.backgroundColor = colors[colorIndex]
+            }
+        })
+    </script>
+</body>
+</html>
